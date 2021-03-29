@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/issuer: "letsencrypt-production"
+spec:
+  tls:
+  - hosts:
+      - newcomers.internal.fin.ag
+      - newcomers-api.internal.fin.ag
+    secretName: awesome-tls
+  rules:
+    - host: newcomers.internal.fin.ag
+      http:
+        paths:
+          - backend:
+              serviceName: awesome-apps-nginx
+              servicePort: {{ .Values.nginx.service.port }}
+            path: /
+    - host: newcomers-api.internal.fin.ag
+      http:
+        paths:
+          - backend:
+              serviceName: awesome-apps-api
+              servicePort: {{ .Values.api.service.port }}
+            path: /

@@ -33,12 +33,12 @@ helm upgrade --install awesome-apps -n flinks kubernetes/awesome-apps
 
 ## Simple ap
 
-https://newcomers.bardina.net
+https://newcomers.internal.fin.ag
 
 ## Api
 
 ```shell
-export API_HOSTNAME="newcomers-api.bardina.net"
+export API_HOSTNAME="newcomers-api.internal.fin.ag"
 ```
 
 ## Get all todos
